@@ -28,8 +28,22 @@ class AMiller_GAM415Projectile : public AActor
 	UPROPERTY(EditAnywhere)
 	UMaterial* baseMat;
 
+	UPROPERTY()
+	FLinearColor randColor;
+
+	UPROPERTY(EditAnywhere)
+	UMaterialInterface* projMat;
+
+	UPROPERTY()
+	UMaterialInstanceDynamic* dmiMat;
+
 public:
 	AMiller_GAM415Projectile();
+
+protected:
+	virtual void BeginPlay();
+
+public:
 
 	/** called when projectile hits something */
 	UFUNCTION()
