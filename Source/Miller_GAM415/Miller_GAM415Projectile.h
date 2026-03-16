@@ -23,25 +23,25 @@ class AMiller_GAM415Projectile : public AActor
 	UProjectileMovementComponent* ProjectileMovement;
 
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* ballMesh;
+	UStaticMeshComponent* ballMesh; //Creats Mesh
 
 	UPROPERTY(EditAnywhere)
-	UMaterial* baseMat;
+	UMaterial* baseMat; //Creates Material
 
 	UPROPERTY()
-	FLinearColor randColor;
+	FLinearColor randColor; //Sets Randomized Color
 
 	UPROPERTY(EditAnywhere)
-	UMaterialInterface* projMat;
+	UMaterialInterface* projMat;//Creates Project Material
 
 	UPROPERTY()
-	UMaterialInstanceDynamic* dmiMat;
+	UMaterialInstanceDynamic* dmiMat; //Creates Dynamic Material
 
 public:
 	AMiller_GAM415Projectile();
 
 protected:
-	virtual void BeginPlay();
+	virtual void BeginPlay(); //Calls Color Function When Shot
 
 public:
 

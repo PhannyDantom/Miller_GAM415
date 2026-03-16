@@ -19,12 +19,12 @@ AMiller_GAM415Projectile::AMiller_GAM415Projectile()
 	CollisionComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
 	CollisionComp->CanCharacterStepUpOn = ECB_No;
 
-	ballMesh = CreateDefaultSubobject<UStaticMeshComponent>("Ball Mesh");
+	ballMesh = CreateDefaultSubobject<UStaticMeshComponent>("Ball Mesh"); //Creates Mesh for Projectile
 
 	// Set as root component
 	RootComponent = CollisionComp;
 
-	ballMesh->SetupAttachment(CollisionComp);
+	ballMesh->SetupAttachment(CollisionComp); //Attaches Mesh to Ball w/ Collision
 
 	// Use a ProjectileMovementComponent to govern this projectile's movement
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComp"));
@@ -39,14 +39,15 @@ AMiller_GAM415Projectile::AMiller_GAM415Projectile()
 }
 
 void AMiller_GAM415Projectile::BeginPlay() {
-
+	//Triggers When Gun is Fired
 	Super::BeginPlay();
+	//Randomly Selects X,Y,Z Variables for Color
 	randColor = FLinearColor(UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), 1.f);
 
-	dmiMat = UMaterialInstanceDynamic::Create(projMat, this);
-	ballMesh->SetMaterial(0, dmiMat);
+	dmiMat = UMaterialInstanceDynamic::Create(projMat, this); //Creates Dynamic Material
+	ballMesh->SetMaterial(0, dmiMat); //Sets DMI to Mesh
 
-	dmiMat->SetVectorParameterValue("ProjColor", randColor);
+	dmiMat->SetVectorParameterValue("ProjColor", randColor); //Applies Colors to Material Para
 }
 
 void AMiller_GAM415Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -60,10 +61,10 @@ void AMiller_GAM415Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* Other
 	}
 
 	if (OtherActor != nullptr) {
-		float frameNum = UKismetMathLibrary::RandomFloatInRange(0.f, 3.f);
+		float frameNum = UKismetMathLibrary::RandomFloatInRange(0.f, 3.f); //Matches Random Colors From Projectile
 
 		auto Decal = UGameplayStatics::SpawnDecalAtLocation(GetWorld(), baseMat, FVector(UKismetMathLibrary::RandomFloatInRange(20.f, 40.f)), Hit.Location, Hit.Normal.Rotation(), 0.f);
-		auto MatInstance = Decal->CreateDynamicMaterialInstance();
+		auto MatInstance = Decal->CreateDynamicMaterialInstance(); //Triggers Splatter Decal
 
 		MatInstance->SetVectorParameterValue("Color", randColor);
 		MatInstance->SetScalarParameterValue("Frame", frameNum);
