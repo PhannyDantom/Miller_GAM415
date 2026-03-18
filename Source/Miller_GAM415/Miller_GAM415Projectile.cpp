@@ -64,12 +64,15 @@ void AMiller_GAM415Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* Other
 
 	if (OtherActor != nullptr) {
 
+		//If ColorP is Valid, Will Assign Effect
 		if (colorP) {
 			UNiagaraComponent* particleComp = UNiagaraFunctionLibrary::SpawnSystemAttached(colorP, HitComp, NAME_None, FVector(-20.f, 0.f, 0.f), FRotator(0.f), EAttachLocation::KeepRelativeOffset, true);
-			particleComp->SetNiagaraVariableLinearColor(FString("RandomColor"), randColor);
-			ballMesh->DestroyComponent();
+			particleComp->SetNiagaraVariableLinearColor(FString("RandomColor"), randColor); //Matches Randomized Color From Splat/Projectile
+			ballMesh->DestroyComponent(); //Destroys Actor to Prevent Infinite Effects
 			CollisionComp->BodyInstance.SetCollisionProfileName("NoCollision");
+			
 		}
+
 		float frameNum = UKismetMathLibrary::RandomFloatInRange(0.f, 3.f); //Matches Random Colors From Projectile
 
 		auto Decal = UGameplayStatics::SpawnDecalAtLocation(GetWorld(), baseMat, FVector(UKismetMathLibrary::RandomFloatInRange(20.f, 40.f)), Hit.Location, Hit.Normal.Rotation(), 0.f);
@@ -77,5 +80,7 @@ void AMiller_GAM415Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* Other
 
 		MatInstance->SetVectorParameterValue("Color", randColor);
 		MatInstance->SetScalarParameterValue("Frame", frameNum);
+
+		
 	}
 }

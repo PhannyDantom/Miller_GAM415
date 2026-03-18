@@ -62,7 +62,7 @@ void ACubeDMIMod::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Ot
 			if (colorP) {
 
 				UNiagaraComponent* particleComp = UNiagaraFunctionLibrary::SpawnSystemAttached(colorP, OtherComp, NAME_None, FVector(0.f), FRotator(0.f), EAttachLocation::KeepRelativeOffset, true);
-				particleComp->SetNiagaraVariableLinearColor(FString("RandColor"), randColor);
+				particleComp->SetNiagaraVariableLinearColor(FString("RandColor"), randColor); //Matches Randomized Color from Cube Collision
 
 			}
 

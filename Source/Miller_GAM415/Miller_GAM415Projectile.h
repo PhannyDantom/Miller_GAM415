@@ -39,7 +39,7 @@ class AMiller_GAM415Projectile : public AActor
 	UMaterialInstanceDynamic* dmiMat; //Creates Dynamic Material
 
 	UPROPERTY(EditAnywhere)
-	UNiagaraSystem* colorP;
+	UNiagaraSystem* colorP; //Particle Color
 
 public:
 	AMiller_GAM415Projectile();
