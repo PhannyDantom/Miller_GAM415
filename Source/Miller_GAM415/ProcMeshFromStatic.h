@@ -29,10 +29,10 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY()
-	TArray<FVector> Vertices;
+	TArray<FVector> Vertices; //Creates Triangles
 
 	UPROPERTY()
-	TArray<int> Triangles;
+	TArray<int> Triangles; //Creates Mesh
 
 	UPROPERTY()
 	TArray<FVector> Normals;

@@ -36,7 +36,7 @@ void AProcMeshFromStatic::PostLoad()
 	GetMeshData();
 }
 
-void AProcMeshFromStatic::GetMeshData() {
+void AProcMeshFromStatic::GetMeshData() { //General Mesh Created, Can Be Altered In Real Time
 	UStaticMesh* mesh = baseMesh->GetStaticMesh();
 	if (mesh) {
 		UKismetProceduralMeshLibrary::GetSectionFromStaticMesh(mesh, 0, 0, Vertices, Triangles, Normals, UV0, Tangents);
