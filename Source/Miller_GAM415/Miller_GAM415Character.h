@@ -67,5 +67,9 @@ public:
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
+public:
+	UPROPERTY(EditAnywhere)
+	bool isTeleporting; //For Portal Functionality
+
 };
 
